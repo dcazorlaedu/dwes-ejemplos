@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratorio PHP · DWES</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; DWES</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a><a href="../lab/" class="on">Laboratorio PHP</a><a href="../demos/" class="">Demos JS</a><a href="../docker/" class="">Docker</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">Laboratorio</div><h1>Laboratorio PHP en el navegador</h1><p>PHP embebido en HTML, sin instalar nada.</p></div></div><main><div class="tip"><strong>PHP 8.4 ejecutándose en tu navegador</strong> (WebAssembly). Escribe PHP dentro del HTML como en clase: el resultado se ve a la derecha tal como lo mostraría el navegador. Limitaciones: <strong>no hay MySQL</strong> (para PDO usa el Docker de clase), ni sesiones persistentes, ni <code>mb_*</code>/<code>intl</code>; <code>$_GET</code> y <code>$_POST</code> se rellenan desde el panel «Parámetros». La primera ejecución descarga ~13 MB.</div>
+<div class="lab"><div class="bar"><label><strong>Ejemplos:</strong> <select id="ej"></select></label>
+<button class="btn min" id="run">▶ Ejecutar (Ctrl+Enter)</button></div>
+<div class="bar"><label>Método <select id="met"><option>GET</option><option>POST</option></select></label>
+<label>$_GET (una por línea, clave=valor) <textarea id="get" style="min-height:3.2rem;width:14rem"></textarea></label>
+<label>$_POST <textarea id="post" style="min-height:3.2rem;width:14rem"></textarea></label></div>
+<div class="cols"><div><textarea id="cod" spellcheck="false" style="min-height:420px"></textarea></div>
+<div><div class="bar"><button class="btn min sec" id="tv" style="color:inherit">Vista</button><button class="btn min sec" id="tc" style="color:inherit">HTML generado</button></div>
+<iframe id="vista" style="width:100%;height:420px;border:1px solid var(--borde);border-radius:8px;background:#fff" sandbox></iframe><pre id="fuente" style="display:none;min-height:420px;max-height:420px;overflow:auto"></pre></div></div>
+<div id="msg" class="out" style="min-height:30px;margin-top:.6rem"></div></div>
+<script type="module">
+import {PhpWeb} from '../assets/php-wasm/PhpWeb.mjs';
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+let EJ=[];
+const parse=t=>t.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const i=l.indexOf('=');return i<0?[l,'']:[l.slice(0,i),l.slice(i+1)]});
+const lit=a=>'['+a.map(([k,v])=>JSON.stringify(k)+'=>'+JSON.stringify(v)).join(',')+']';
+async function ejecutar(){
+  $('msg').textContent='Ejecutando…'; const t0=performance.now();
+  let out='', err='';
+  try{
+    const php=new PhpWeb(); php.addEventListener('output',e=>out+=e.detail.join('')); php.addEventListener('error',e=>err+=e.detail.join(''));
+    await php.binary;
+    const pre='<?php $_GET='+lit(parse($('get').value))+'; $_POST='+lit(parse($('post').value))+'; $_REQUEST=$_GET+$_POST; $_SERVER["REQUEST_METHOD"]='+JSON.stringify($('met').value)+'; ?>';
+    let cod=$('cod').value, st='';
+    if(/declare\(\s*strict_types\s*=\s*1\s*\)\s*;/.test(cod)){ cod=cod.replace(/declare\(\s*strict_types\s*=\s*1\s*\)\s*;/,''); st=' declare(strict_types=1);'; }
+    await php.run(pre.replace('<?php','<?php'+st)+cod);
+  }catch(e){ err+=String(e); }
+  $('vista').srcdoc = out || '<p style="font-family:sans-serif;color:#666">(sin salida)</p>';
+  $('fuente').textContent = out;
+  $('msg').innerHTML = (err.trim()? '<span class="err">✘ Mensajes de PHP</span><pre>'+esc(err)+'</pre>' : '<span class="ok">✔ Ejecutado</span> en '+(performance.now()-t0).toFixed(0)+' ms');
+}
+const vista=v=>{$('vista').style.display=v?'':'none';$('fuente').style.display=v?'none':'block'};
+async function main(){
+  EJ=await (await fetch('../assets/ejemplos.json')).json();
+  $('ej').innerHTML='<option value="">— elige un ejemplo —</option>'+EJ.map(e=>'<option value="'+e.id+'">'+esc(e.t)+'</option>').join('');
+  const cargar=id=>{const e=EJ.find(x=>x.id===id); if(!e) return; $('cod').value=e.code; $('ej').value=id; $('met').value=e.ctl.method||'GET'; $('get').value=e.ctl.get||''; $('post').value=e.ctl.post||''};
+  $('ej').onchange=()=>{cargar($('ej').value); ejecutar()};
+  $('run').onclick=ejecutar; $('tv').onclick=()=>vista(true); $('tc').onclick=()=>vista(false);
+  $('cod').addEventListener('keydown',e=>{ if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();ejecutar()}});
+  const h=location.hash.slice(1); cargar(h||'ut1-hola'); ejecutar();
+}
+main();
+</script></main>
+<footer>Material didáctico · 2026-27 · Todos los datos de los ejemplos son ficticios. No incluye soluciones de ejercicios ni pruebas.</footer></body></html>

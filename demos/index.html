@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demos JS · DWES</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; DWES</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a><a href="../lab/" class="">Laboratorio PHP</a><a href="../demos/" class="on">Demos JS</a><a href="../docker/" class="">Docker</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">Demos</div><h1>Demos de JavaScript</h1><p>AJAX, almacenamiento y consumo de una API.</p></div></div><main><div class="crumb"><a href="../">Inicio</a> › Demos JS</div>
+<p>Estas demos son JavaScript puro en el navegador (sin servidor PHP): ilustran lo que el cliente hace en la <strong>Unidad 7</strong> y las cookies/almacenamiento de la <strong>Unidad 4</strong>.</p>
+<h2>1. Buscador AJAX con «debounce» (UT7)</h2><p>Cada pulsación no lanza una petición: espera 300 ms sin teclear y entonces hace <code>fetch</code> a un JSON.</p>
+<div class="lab"><input id="q" placeholder="Escribe: monitor, cable, portátil…" style="width:100%;padding:.5rem"><p id="est" style="font-size:.85rem;opacity:.75"></p><div id="r"></div></div>
+<h2>2. Tema claro/oscuro con localStorage (UT4)</h2><p>La preferencia se guarda en tu navegador; recarga la página y se mantiene.</p>
+<div class="lab"><button class="btn min" id="tema">Cambiar tema</button> <span id="tt"></span></div>
+<h2>3. Tiempo en Totana: API REST real (UT6)</h2><p>Consulta el servicio público <em>Open-Meteo</em> (JSON sobre HTTP). Mira abajo la respuesta y el código de estado.</p>
+<div class="lab"><button class="btn min" id="met">Consultar</button><p id="mt"></p><pre id="mj" style="max-height:220px;overflow:auto"></pre></div>
+<script>
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+let t,n=0; $('q').addEventListener('input',()=>{ clearTimeout(t); $('est').textContent='escribiendo…'; t=setTimeout(async()=>{ const q=$('q').value.trim().toLowerCase(); n++; const d=await (await fetch('../assets/productos.json')).json(); const r=q?d.filter(p=>(p.nombre+p.categoria).toLowerCase().includes(q)):[]; $('est').textContent='Peticiones realizadas: '+n+' · resultados: '+r.length; $('r').innerHTML='<table class="res"><tr><th>Producto</th><th>Categoría</th><th>Precio</th></tr>'+r.map(p=>'<tr><td>'+esc(p.nombre)+'</td><td>'+esc(p.categoria)+'</td><td>'+p.precio.toFixed(2)+' €</td></tr>').join('')+'</table>'; },300) });
+const tema=()=>{const o=localStorage.getItem('tema')==='oscuro'; document.body.style.background=o?'#16202b':''; document.body.style.color=o?'#e8eef4':''; $('tt').textContent='Tema guardado: '+(o?'oscuro':'claro')};
+$('tema').onclick=()=>{localStorage.setItem('tema',localStorage.getItem('tema')==='oscuro'?'claro':'oscuro'); tema()}; tema();
+$('met').onclick=async()=>{ try{ const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.77&longitude=-1.50&current=temperature_2m,wind_speed_10m&timezone=Europe%2FMadrid'); const j=await r.json(); $('mt').innerHTML='<strong>HTTP '+r.status+' '+(r.statusText||'OK')+'</strong> · Totana: '+j.current.temperature_2m+' °C, viento '+j.current.wind_speed_10m+' km/h'; $('mj').textContent=JSON.stringify(j,null,2) }catch(e){ $('mt').innerHTML='<span class="err">Error de red</span> '+esc(e.message) } };
+</script></main>
+<footer>Material didáctico · 2026-27 · Todos los datos de los ejemplos son ficticios. No incluye soluciones de ejercicios ni pruebas.</footer></body></html>

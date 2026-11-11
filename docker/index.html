@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docker · DWES</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; DWES</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a><a href="../lab/" class="">Laboratorio PHP</a><a href="../demos/" class="">Demos JS</a><a href="../docker/" class="on">Docker</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">Entorno</div><h1>Docker + DataGrip</h1><p>Servidor web PHP y MySQL en un comando.</p></div></div><main><div class="crumb"><a href="../">Inicio</a> › Docker</div><h2>Entorno de trabajo</h2><p>Los ejemplos de clase se ejecutan en un contenedor <code>php-apache</code> (puerto 8080) con MySQL (host <code>db</code>, puerto 3306 publicado para conectar con <strong>DataGrip</strong>). Descarga el entorno, descomprímelo y arráncalo:</p><p><a class="btn" href="../descargas/entorno-dwes-docker.zip">⬇ entorno-dwes-docker.zip</a></p><pre><code>cd entorno-dwes
+docker compose up -d --build
+# Web:       http://localhost:8080
+# DataGrip:  host localhost · puerto 3306 · usuario dwes · base tienda</code></pre><h2>docker-compose.yml</h2><pre><code>services:
+  web:
+    build: ./docker/php
+    ports: [&quot;8080:80&quot;]
+    environment:
+      DB_HOST: db
+      DB_NAME: tienda
+      DB_USER: dwes
+      DB_PASS: dwes_dev
+    volumes:
+      - ./src:/var/www/html
+    depends_on: [db]
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root_dev
+      MYSQL_DATABASE: tienda
+      MYSQL_USER: dwes
+      MYSQL_PASSWORD: dwes_dev
+    ports: [&quot;3306:3306&quot;]            # DataGrip se conecta a localhost:3306
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+volumes:
+  db_data:
+</code></pre><h2>Léeme</h2><pre><code>Entorno de DWES (Docker + DataGrip)
+1) docker compose up -d
+2) Navegador: http://localhost:8080  (las paginas PHP se guardan en ./src)
+3) DataGrip: New &gt; Data Source &gt; MySQL: host localhost, puerto 3306, usuario dwes, contrasena dwes_dev, base tienda
+4) Desde PHP (dentro del contenedor) el servidor de base de datos es &#x27;db&#x27;, no &#x27;localhost&#x27;.
+Las contrasenas son solo para el entorno de clase.
+</code></pre></main>
+<footer>Material didáctico · 2026-27 · Todos los datos de los ejemplos son ficticios. No incluye soluciones de ejercicios ni pruebas.</footer></body></html>
