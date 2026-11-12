@@ -1,0 +1,625 @@
+{
+  "unidad": {
+    "1": {
+      "ra": [
+        "RA1"
+      ],
+      "nombre": "Introducción al desarrollo de aplicaciones web"
+    },
+    "2": {
+      "ra": [
+        "RA2",
+        "RA3"
+      ],
+      "nombre": "Programación PHP del lado del servidor"
+    },
+    "3": {
+      "ra": [
+        "RA6"
+      ],
+      "nombre": "Acceso a bases de datos desde PHP"
+    },
+    "4": {
+      "ra": [
+        "RA4"
+      ],
+      "nombre": "Sesiones, estado y autenticación"
+    },
+    "5": {
+      "ra": [
+        "RA5"
+      ],
+      "nombre": "Desarrollo con un framework (Laravel)"
+    },
+    "6": {
+      "ra": [
+        "RA7"
+      ],
+      "nombre": "Servicios web y API REST"
+    },
+    "7": {
+      "ra": [
+        "RA8",
+        "RA9"
+      ],
+      "nombre": "Páginas interactivas y aplicaciones híbridas"
+    }
+  },
+  "ra_texto": {
+    "RA1": "Selecciona las arquitecturas y tecnologías de programación web en entorno servidor, analizando sus capacidades y características propias.",
+    "RA2": "Escribe sentencias ejecutables por un servidor web reconociendo y aplicando procedimientos de integración del código en lenguajes de marcas.",
+    "RA3": "Escribe bloques de sentencias embebidos en lenguajes de marcas, seleccionando y utilizando las estructuras de programación.",
+    "RA4": "Desarrolla aplicaciones web embebidas en lenguajes de marcas analizando e incorporando funcionalidades según especificaciones.",
+    "RA5": "Desarrolla aplicaciones web identificando y aplicando mecanismos para separar el código de presentación de la lógica de negocio.",
+    "RA6": "Desarrolla aplicaciones web de acceso a almacenes de datos, aplicando medidas para mantener la seguridad y la integridad de la información.",
+    "RA7": "Desarrolla servicios web reutilizables y accesibles mediante protocolos web, verificando su funcionamiento.",
+    "RA8": "Genera páginas web dinámicas analizando y utilizando tecnologías y frameworks del servidor web que añadan código al lenguaje de marcas.",
+    "RA9": "Desarrolla aplicaciones web híbridas seleccionando y utilizando tecnologías, frameworks servidor y repositorios heterogéneos de información."
+  },
+  "ce_esperados": {
+    "RA1": "abcdefg",
+    "RA2": "abcdefgh",
+    "RA3": "abcdefg",
+    "RA4": "abcdef",
+    "RA5": "abcdefgh",
+    "RA6": "abcdefg",
+    "RA7": "abcdefgh",
+    "RA8": "abcdefg",
+    "RA9": "abcdefgh"
+  },
+  "ejercicios": [
+    {
+      "ut": 1,
+      "dificultad": 1,
+      "titulo": "Del archivo HTML a la página dinámica",
+      "contexto": "El club «Sendas del Sureste» tiene una web estática y quiere mostrar la fecha de la próxima salida y el nombre de quien visita la página. Trabajas con el entorno Docker del material (servidor web en `http://localhost:8080`).",
+      "tareas": [
+        "Crea `estatica.html` y `dinamica.php` con el mismo aspecto. Explica, con lo que ves en el navegador y en la pestaña *Red* (F12), qué se ejecuta en el servidor y qué en el cliente.",
+        "Haz que `dinamica.php` muestre la fecha y la hora del servidor y un saludo con el nombre recibido por la URL (`?nombre=...`). Compara el HTML recibido con el código fuente del fichero `.php`.",
+        "Describe qué mecanismo usa el servidor para ejecutar PHP en tu entorno (módulo de Apache o PHP-FPM) y cómo decide qué ficheros procesa por extensión.",
+        "Identifica en tu página dónde se integran el lenguaje de marcas y el lenguaje de programación (etiquetas de apertura/cierre, `<?= ?>`) y qué ventajas aporta la generación dinámica frente a la página estática."
+      ],
+      "entrega": "Los dos ficheros, una captura de la pestaña Red con la respuesta de cada uno y una tabla breve «servidor / cliente» (qué se ejecuta y dónde).",
+      "ce": [
+        "RA1:a",
+        "RA1:b",
+        "RA1:c",
+        "RA1:f"
+      ],
+      "pista": "El navegador nunca recibe código PHP: solo HTML. Comprueba con «Ver código fuente» y con la cabecera `Content-Type`.",
+      "aceptacion": [
+        "`dinamica.php` muestra una hora distinta al recargar y `estatica.html` no.",
+        "El código fuente recibido en el navegador no contiene etiquetas `<?php`.",
+        "El nombre recibido por la URL se muestra escapado (`htmlspecialchars`)."
+      ],
+      "ampliacion": [
+        "Observa en la pestaña Red las cabeceras y el código de estado de una petición `GET` y de otra a una ruta inexistente (404). Fíjate en `Content-Type`, `Cache-Control` y `Set-Cookie`."
+      ],
+      "id": "01_ejercicio_UT1"
+    },
+    {
+      "ut": 1,
+      "dificultad": 2,
+      "titulo": "Arquitectura y herramientas para una aplicación de reservas",
+      "contexto": "Una asociación quiere una aplicación de reservas de salidas con listado público, panel de gestión y una app móvil en el futuro. Debes proponer la arquitectura y las herramientas sin escribir todavía el código.",
+      "tareas": [
+        "Dibuja un diagrama con navegador, servidor web, intérprete de PHP y base de datos y explica el recorrido de una petición «ver el listado de salidas».",
+        "Compara tres opciones: PHP «puro» con páginas, un framework (Laravel) y una API + aplicación de una sola página. Indica ventajas, inconvenientes y cuándo elegirías cada una.",
+        "Enumera los lenguajes y tecnologías de servidor más habituales (PHP, Node.js, Python, Java, .NET…) y razona por qué PHP + MySQL encaja aquí.",
+        "Explica el papel de un servidor de aplicaciones o *runtime* frente a un servidor web, y qué herramientas (Composer, Git, Docker, depurador) usarías en el equipo.",
+        "Describe cómo integrarías HTML/CSS/JavaScript con PHP en esta aplicación y qué parte correspondería a cada tecnología."
+      ],
+      "entrega": "Diagrama, tabla comparativa y una recomendación argumentada de una página.",
+      "ce": [
+        "RA1:c",
+        "RA1:d",
+        "RA1:e",
+        "RA1:f",
+        "RA1:g"
+      ],
+      "pista": "Una buena recomendación justifica la elección con los requisitos (equipo, plazos, escalabilidad, mantenimiento), no con preferencias.",
+      "aceptacion": [
+        "El diagrama muestra el sentido de la petición y de la respuesta.",
+        "La tabla compara al menos tres criterios (curva de aprendizaje, rendimiento, mantenimiento…).",
+        "La recomendación menciona herramientas concretas (Composer, Docker, Git) y su función."
+      ],
+      "id": "02_ejercicio_UT1"
+    },
+    {
+      "ut": 2,
+      "dificultad": 1,
+      "titulo": "Primera página PHP embebida en HTML",
+      "contexto": "Necesitas una página de presentación del club que mezcle HTML y PHP. Se ejecuta en el entorno Docker (`http://localhost:8080`).",
+      "tareas": [
+        "Crea `club.php` con HTML válido y bloques `<?php ... ?>` y `<?= ... ?>` que muestren el nombre del club, el año actual y una lista de tres salidas guardadas en variables.",
+        "Explica con tus palabras cómo se genera la página (qué recibe el navegador) y qué tecnologías alternativas existen (ASP.NET, JSP, Python, Node.js).",
+        "Escribe sentencias simples (`echo`, concatenación, `date()`) y comprueba su efecto en el documento resultante. Añade comentarios de línea, de bloque y HTML, y explica cuáles llegan al navegador.",
+        "Introduce un error de sintaxis deliberado, localiza el mensaje y corrígelo. Explica por qué el error se ve (o no) según la configuración de `display_errors`."
+      ],
+      "entrega": "`club.php`, una captura de la página y un párrafo explicando los comentarios y el error provocado.",
+      "ce": [
+        "RA2:a",
+        "RA2:b",
+        "RA2:c",
+        "RA2:d",
+        "RA2:e",
+        "RA3:g"
+      ],
+      "pista": "Los comentarios de PHP no llegan al navegador; los de HTML sí.",
+      "aceptacion": [
+        "La página es HTML válido y la lista se genera desde variables PHP.",
+        "Los comentarios de PHP no aparecen en el código fuente recibido, los de HTML sí.",
+        "El error de sintaxis produce un mensaje con fichero y línea (en desarrollo)."
+      ],
+      "id": "03_ejercicio_UT2"
+    },
+    {
+      "ut": 2,
+      "dificultad": 2,
+      "titulo": "Variables, operadores, ámbito y directivas",
+      "contexto": "La tienda del club calcula el precio de las inscripciones con descuentos. Debes practicar tipos, operadores y ámbitos.",
+      "tareas": [
+        "Declara variables de los cuatro tipos escalares y de un array; muestra con `var_dump` sus tipos y realiza conversiones (`(int)`, `intval`, `settype`) y comparaciones con `==` y `===` explicando las diferencias.",
+        "Calcula el precio final de una inscripción con operadores aritméticos, de asignación compuesta, lógicos y de coalescencia nula (`??`).",
+        "Demuestra el ámbito de variables: una variable global no visible en una función, `global`, `static` y parámetros. Explica cuándo cada opción es adecuada.",
+        "Usa al menos dos directivas que cambien el comportamiento por defecto (`declare(strict_types=1)`, `ini_set` o `error_reporting`) y muestra el efecto antes y después.",
+        "Define constantes con `const` y `define()` y explica en qué se diferencian de las variables."
+      ],
+      "entrega": "Un fichero `tipos.php` por apartado (o uno con secciones) y una tabla con el resultado esperado frente al observado.",
+      "ce": [
+        "RA2:f",
+        "RA2:g",
+        "RA2:h",
+        "RA3:a"
+      ],
+      "pista": "Con `strict_types=1` una llamada con un tipo distinto al declarado lanza un `TypeError`.",
+      "aceptacion": [
+        "`var_dump` muestra tipos correctos para cada variable.",
+        "La función no puede leer la variable global sin `global` o parámetro.",
+        "La directiva elegida produce un cambio observable en la salida."
+      ],
+      "id": "04_ejercicio_UT2"
+    },
+    {
+      "ut": 2,
+      "dificultad": 3,
+      "titulo": "Tabla dinámica de salidas con arrays, bucles y funciones",
+      "contexto": "El club guarda sus salidas en un array y quiere mostrarlas en una tabla HTML con resumen estadístico.",
+      "tareas": [
+        "Define un array de 6 salidas (ruta, km, dificultad, plazas libres) y recórrelo con `foreach` para generar una tabla; marca en rojo las completas (0 plazas) usando una condición.",
+        "Utiliza también `for` y `while` para otras salidas (por ejemplo, numerar filas o generar un calendario de 4 semanas) y comprueba que terminan correctamente.",
+        "Crea funciones con parámetros tipados y valor de retorno (`kmTotales`, `mediaKm`, `filtrarPorDificultad`) y úsalas en la página; añade comentarios `/** ... */` explicando cada una.",
+        "Ordena el array por kilómetros con `usort` y agrupa por dificultad. Usa funciones de array (`array_map`, `array_filter`, `array_column`).",
+        "Aplica una estructura de decisión múltiple (`match` o `switch`) para traducir la dificultad a un icono o etiqueta."
+      ],
+      "entrega": "`salidas.php` con la tabla, el listado de funciones y una captura del resultado.",
+      "ce": [
+        "RA3:a",
+        "RA3:b",
+        "RA3:c",
+        "RA3:d",
+        "RA3:g"
+      ],
+      "pista": "Si la salida de una función depende de un bucle, escribe primero el caso con un solo elemento y después generaliza.",
+      "aceptacion": [
+        "La tabla tiene una fila por salida y las filas completas se distinguen visualmente.",
+        "Las funciones tienen tipos de parámetros y de retorno.",
+        "El orden por kilómetros es correcto (ascendente) y el agrupado por dificultad no pierde filas."
+      ],
+      "id": "05_ejercicio_UT2"
+    },
+    {
+      "ut": 2,
+      "dificultad": 4,
+      "titulo": "Formulario de inscripción con validación y patrón PRG",
+      "contexto": "Los socios se inscriben en salidas mediante un formulario. Debes recoger los datos, validarlos en el servidor y confirmar sin duplicar envíos.",
+      "tareas": [
+        "Crea `inscripcion.php` con un formulario (nombre, correo, edad, salida, aceptación) enviado por `POST` y etiquetas `label` asociadas a cada campo.",
+        "Recupera los datos con `$_POST`, valida cada campo (longitud, formato de correo con `filter_var`, rango de edad, valor de la lista) y muestra los errores junto a cada campo conservando lo escrito.",
+        "Si todo es válido, guarda la inscripción en un fichero (CSV o JSON), redirige con el patrón *Post/Redirect/Get* y muestra un mensaje de confirmación en la página de destino.",
+        "Demuestra que la salida está escapada con `htmlspecialchars` enviando un nombre con etiquetas HTML y explica por qué la validación del navegador (HTML5) no basta.",
+        "Explica la diferencia entre `GET` y `POST` y entre `$_GET`, `$_POST` y `$_REQUEST`; justifica tu elección para este formulario."
+      ],
+      "entrega": "La aplicación (página, fichero de datos), capturas del formulario con errores y con confirmación, y un párrafo sobre seguridad.",
+      "ce": [
+        "RA3:d",
+        "RA3:e",
+        "RA3:f",
+        "RA2:e"
+      ],
+      "pista": "Tras guardar, redirige con `header('Location: ...')` y `exit`; al recargar la página de confirmación no debe duplicarse la inscripción.",
+      "aceptacion": [
+        "Un envío con datos inválidos muestra errores y conserva los valores.",
+        "Un envío válido guarda una fila y redirige (código 302/303).",
+        "Recargar la página de confirmación no crea otra fila.",
+        "Una etiqueta `<b>` en el nombre se muestra como texto."
+      ],
+      "ampliacion": [
+        "Añade validación de subida de un fichero (foto de perfil): comprueba tamaño, tipo real con `finfo` y guárdalo con un nombre aleatorio fuera de la raíz web."
+      ],
+      "id": "06_ejercicio_UT2"
+    },
+    {
+      "ut": 3,
+      "dificultad": 1,
+      "titulo": "Conecta con MySQL y publica el catálogo",
+      "contexto": "La tienda del club (`tienda`, base de datos del entorno Docker) debe mostrar su catálogo en una página web. Conéctate también con DataGrip (`localhost:3306`, usuario `dwes`).",
+      "tareas": [
+        "Compara MySQLi y PDO (tabla de ventajas) y elige una tecnología de acceso para el proyecto; justifica la elección.",
+        "Escribe `db.php` con una función de conexión reutilizable (PDO, excepciones, `utf8mb4`) que lea el servidor de variables de entorno (`db` dentro de Docker).",
+        "Crea `catalogo.php` que recupere productos con su categoría mediante una consulta con `JOIN` y los publique en una tabla HTML con el precio formateado.",
+        "Guarda el resultado en un array de resultados (`fetchAll`) y recórrelo con `foreach`; explica la diferencia entre `fetch`, `fetchAll` y recorrer el `PDOStatement`.",
+        "Verifica en DataGrip que la consulta devuelve las mismas filas que la página."
+      ],
+      "entrega": "`db.php`, `catalogo.php`, captura de la página y de DataGrip con la misma consulta.",
+      "ce": [
+        "RA6:a",
+        "RA6:b",
+        "RA6:c",
+        "RA6:d",
+        "RA6:e"
+      ],
+      "pista": "La conexión se crea una sola vez por petición; guarda las credenciales fuera del código si es posible.",
+      "aceptacion": [
+        "La página muestra todos los productos con su categoría.",
+        "El mensaje de error de conexión no revela credenciales.",
+        "Los importes se muestran con dos decimales."
+      ],
+      "id": "07_ejercicio_UT3"
+    },
+    {
+      "ut": 3,
+      "dificultad": 2,
+      "titulo": "CRUD de productos con consultas preparadas",
+      "contexto": "El almacén necesita añadir, modificar y borrar productos desde una página de administración, sin riesgo de inyección SQL.",
+      "tareas": [
+        "Implementa un listado con búsqueda por nombre y paginación (`LIMIT`/`OFFSET`, con parámetros enteros).",
+        "Crea el formulario de alta y la inserción con consulta preparada (nombre, categoría, precio, stock) validando los datos antes de enviarlos.",
+        "Implementa la edición y el borrado (este último con `POST` y confirmación) y muestra mensajes de resultado con el patrón *Post/Redirect/Get*.",
+        "Demuestra, con una búsqueda del tipo `x' OR '1'='1`, que tu aplicación no es vulnerable y explica por qué una consulta construida concatenando texto sí lo sería.",
+        "Controla los errores: clave ajena inexistente, nombre duplicado y borrado de un producto con pedidos; muestra un mensaje claro sin revelar detalles internos."
+      ],
+      "entrega": "Aplicación (listado, alta, edición, borrado) y capturas de la prueba de inyección y de los errores controlados.",
+      "ce": [
+        "RA6:c",
+        "RA6:d",
+        "RA6:f",
+        "RA6:g"
+      ],
+      "pista": "Los marcadores `:nombre` o `?` solo sustituyen **valores**, nunca nombres de tablas o columnas.",
+      "aceptacion": [
+        "La búsqueda con `x' OR '1'='1` no devuelve todos los productos.",
+        "Cada operación muestra un mensaje de confirmación.",
+        "Un borrado imposible por clave ajena muestra un error controlado."
+      ],
+      "ampliacion": [
+        "Aísla el SQL de productos en una clase repositorio y compara el diseño antes y después."
+      ],
+      "id": "08_ejercicio_UT3"
+    },
+    {
+      "ut": 3,
+      "dificultad": 3,
+      "titulo": "Pedido transaccional, pruebas y documentación",
+      "contexto": "Al confirmar un pedido deben insertarse la cabecera y las líneas y descontarse el stock; si algo falla no debe quedar nada a medias.",
+      "tareas": [
+        "Diseña el flujo de «confirmar pedido» (cliente, líneas con producto y cantidad) y escríbelo con una transacción PDO (`beginTransaction`, `commit`, `rollBack`).",
+        "Comprueba el stock con `SELECT ... FOR UPDATE` dentro de la transacción y rechaza el pedido si no hay unidades suficientes, sin dejar datos parciales.",
+        "Prueba tres casos con peticiones reales (formulario o `curl`): pedido correcto, stock insuficiente y producto inexistente; registra el estado de las tablas antes y después de cada caso.",
+        "Explica qué pasaría con dos pedidos simultáneos del mismo producto y cómo lo previene el bloqueo de la fila.",
+        "Documenta la aplicación: README con requisitos, instalación en Docker, esquema de tablas, decisiones de seguridad y lista de pruebas realizadas."
+      ],
+      "entrega": "Código, registro de pruebas (antes/después de cada caso), README de la aplicación y breve análisis de concurrencia.",
+      "ce": [
+        "RA6:b",
+        "RA6:f",
+        "RA6:g"
+      ],
+      "pista": "El orden importa: comprobar y bloquear primero, insertar y descontar después, confirmar al final.",
+      "aceptacion": [
+        "En el caso de stock insuficiente no existe cabecera de pedido ni líneas.",
+        "En el caso correcto el stock baja exactamente la cantidad pedida.",
+        "El README permite a otra persona ponerlo en marcha."
+      ],
+      "id": "09_ejercicio_UT3"
+    },
+    {
+      "ut": 4,
+      "dificultad": 1,
+      "titulo": "Cookies y preferencias del usuario",
+      "contexto": "Los socios quieren elegir tema claro u oscuro y que la web lo recuerde. Trabajas con cookies y almacenamiento en el cliente.",
+      "tareas": [
+        "Explica qué información sobre un cliente web puede mantenerse (cookies, sesión, almacenamiento local) y en qué se diferencian en lugar de almacenamiento, duración y seguridad.",
+        "Crea una página que guarde la preferencia de tema en una cookie con `setcookie` (caducidad de 30 días, `SameSite=Lax`) y la use en la siguiente visita.",
+        "Añade un contador de visitas por sesión con `$_SESSION` y muestra cómo viaja el identificador de sesión en la cookie `PHPSESSID`.",
+        "Guarda un dato en el cliente con JavaScript (`localStorage`) y recupéralo al recargar; indica qué datos **no** deberían guardarse allí."
+      ],
+      "entrega": "Páginas, capturas de la pestaña *Application/Red* con las cookies y una tabla comparativa de mecanismos.",
+      "ce": [
+        "RA4:a",
+        "RA4:b",
+        "RA4:c"
+      ],
+      "pista": "Una cookie se envía en cada petición al sitio: no guardes en ella datos sensibles.",
+      "aceptacion": [
+        "Al recargar, el tema elegido se mantiene.",
+        "El contador de sesión aumenta y se reinicia al cerrar el navegador.",
+        "La cookie tiene fecha de caducidad y `SameSite` visibles en las herramientas."
+      ],
+      "id": "10_ejercicio_UT4"
+    },
+    {
+      "ut": 4,
+      "dificultad": 2,
+      "titulo": "Inicio de sesión con contraseñas seguras",
+      "contexto": "El panel del club necesita identificar a los usuarios. Hay que implantar un login seguro.",
+      "tareas": [
+        "Crea la tabla de usuarios (correo único, hash de la contraseña, rol) y registra dos usuarios guardando la contraseña con `password_hash`.",
+        "Implementa `login.php`: verificación con `password_verify`, `session_regenerate_id(true)` al entrar y mensaje de error genérico («usuario o contraseña incorrectos»).",
+        "Protege `panel.php`: si no hay sesión, redirige al login. Implementa el cierre de sesión destruyendo la sesión y la cookie.",
+        "Explica los mecanismos de autenticación disponibles (formulario + sesión, HTTP básica, tokens, OAuth) y cuándo usar cada uno."
+      ],
+      "entrega": "Aplicación (registro, login, panel, salir) y una tabla de mecanismos de autenticación.",
+      "ce": [
+        "RA4:b",
+        "RA4:d",
+        "RA4:e"
+      ],
+      "pista": "No guardes nunca la contraseña en claro ni con MD5/SHA-1.",
+      "aceptacion": [
+        "La base de datos no contiene contraseñas en claro.",
+        "Acceder a `panel.php` sin sesión redirige a `login.php`.",
+        "Tras salir, la página protegida deja de ser accesible con el botón «atrás» y recargando."
+      ],
+      "id": "11_ejercicio_UT4"
+    },
+    {
+      "ut": 4,
+      "dificultad": 3,
+      "titulo": "Roles, CSRF y depuración",
+      "contexto": "Se añaden perfiles (comercial, almacén, administrador) y hay que proteger los formularios y probar la aplicación.",
+      "tareas": [
+        "Implementa una función única de autorización (`puede($rol, $permiso)`) y úsala para ocultar enlaces **y** para impedir el acceso directo a páginas (403).",
+        "Protege los formularios con un token CSRF guardado en la sesión y comparado con `hash_equals`; demuestra con `curl` que una petición sin token recibe 403.",
+        "Limita los intentos de acceso (por ejemplo, bloqueo de 10 minutos tras 3 fallos) y demuestra el bloqueo.",
+        "Depura un fallo: usa `var_dump`/`error_log`, la pestaña Red y los registros del servidor para localizar un error que introduzcas deliberadamente, y escribe tres pruebas manuales o automáticas de la autorización."
+      ],
+      "entrega": "Código, evidencias de las pruebas (capturas o salidas de `curl`) y un informe de depuración de media página.",
+      "ce": [
+        "RA4:d",
+        "RA4:e",
+        "RA4:f"
+      ],
+      "pista": "Oculta lo que el usuario no puede hacer **y** comprueba el permiso en el servidor.",
+      "aceptacion": [
+        "Un comercial recibe 403 al abrir la página de administración escribiendo la URL.",
+        "Un POST sin token CSRF recibe 403.",
+        "Tras 3 intentos fallidos el usuario queda bloqueado y el mensaje no revela si existe la cuenta."
+      ],
+      "ampliacion": [
+        "Sustituye el bloqueo por un límite de peticiones por IP con cabeceras `Retry-After` y `X-RateLimit-Remaining`."
+      ],
+      "id": "12_ejercicio_UT4"
+    },
+    {
+      "ut": 5,
+      "dificultad": 2,
+      "titulo": "De la página a un MVC mínimo",
+      "contexto": "La página de administración del almacén mezcla HTML, SQL y reglas de negocio. Debes separarlas sin usar todavía un framework.",
+      "tareas": [
+        "Analiza el código de una página que mezcla presentación y lógica y enumera los problemas (mantenimiento, pruebas, seguridad, reutilización).",
+        "Reorganiza la aplicación en tres capas: modelo (clases `Producto` y `ProductoRepositorio`), vista (plantillas con solo HTML y `<?= ?>`) y controlador (`ProductoControlador`) con un enrutador sencillo (`index.php?accion=...`).",
+        "Aplica principios de POO: interfaz del repositorio, inyección de dependencias en el controlador y propiedades `readonly`.",
+        "Mueve la configuración (conexión, entorno) a un fichero propio y lee los parámetros de variables de entorno.",
+        "Explica qué ganas con esta separación y qué frameworks (Laravel, Symfony) la ofrecen ya resuelta."
+      ],
+      "entrega": "Estructura de carpetas, código de las tres capas y una explicación de una página sobre la separación de responsabilidades.",
+      "ce": [
+        "RA5:a",
+        "RA5:b",
+        "RA5:c",
+        "RA5:e",
+        "RA5:g"
+      ],
+      "pista": "Una vista no debería contener consultas SQL ni decisiones de negocio.",
+      "aceptacion": [
+        "Las plantillas no contienen SQL.",
+        "El controlador depende de una interfaz de repositorio, no de PDO directamente.",
+        "Cambiar el título de la página solo exige tocar la vista."
+      ],
+      "id": "13_ejercicio_UT5"
+    },
+    {
+      "ut": 5,
+      "dificultad": 3,
+      "titulo": "Tienda con Laravel: CRUD, autorización y pruebas",
+      "contexto": "Se reconstruye el catálogo con Laravel (Composer instalado en el equipo o en el contenedor). Se parte de un proyecto nuevo con `laravel new` o `composer create-project`.",
+      "tareas": [
+        "Crea el proyecto, define la migración y el modelo Eloquent de `Producto` y `Categoria` (relación `belongsTo`/`hasMany`) y un *seeder* con datos de prueba.",
+        "Implementa rutas de recurso, un controlador, vistas Blade con un layout común y un formulario generado dinámicamente con validación mediante un *Form Request*; muestra los errores y los valores antiguos (`old()`).",
+        "Incorpora autenticación y una Policy para que solo el rol «almacén» edite y solo «administrador» borre; protege las rutas con *middleware*.",
+        "Evita el problema N+1 con `with()` y demuestra el número de consultas antes y después.",
+        "Escribe al menos cuatro pruebas de *Feature* con `RefreshDatabase` (listado público, validación, autorización 403, creación) y documenta cómo ejecutarlas (`php artisan test`)."
+      ],
+      "entrega": "Repositorio del proyecto (sin `vendor/` ni `.env`), salida de `php artisan test` y un README con instrucciones.",
+      "ce": [
+        "RA5:b",
+        "RA5:d",
+        "RA5:e",
+        "RA5:f",
+        "RA5:h"
+      ],
+      "pista": "El estado de la aplicación (usuario, mensajes *flash*) se mantiene con sesión; la lógica de negocio va en el modelo o en servicios, no en la vista.",
+      "aceptacion": [
+        "`php artisan test` termina en verde.",
+        "Un usuario sin permiso recibe 403 al intentar editar o borrar.",
+        "La página de listado ejecuta un número constante de consultas, no una por fila."
+      ],
+      "id": "14_ejercicio_UT5"
+    },
+    {
+      "ut": 6,
+      "dificultad": 1,
+      "titulo": "Diseña y programa una API REST de rutas",
+      "contexto": "El club quiere ofrecer sus rutas a otras aplicaciones mediante una API. Se parte de la base de datos `tienda` o de una tabla propia `rutas`.",
+      "tareas": [
+        "Explica qué es un servicio web, su ámbito (integración entre sistemas, apps móviles, terceros) y las ventajas de exponer la lógica como servicio.",
+        "Describe los protocolos y estándares implicados (HTTP, REST, JSON, SOAP/WSDL, OpenAPI) y compara REST con SOAP.",
+        "Diseña los recursos y verbos de la API (`GET/POST/PUT/DELETE /rutas`) con los códigos de estado que devolverá cada caso (200, 201, 204, 404, 422, 405).",
+        "Programa la API en PHP (un controlador frontal, respuestas JSON, validación y códigos correctos, cabecera `Location` al crear)."
+      ],
+      "entrega": "Tabla de recursos y códigos, código de la API y salidas de `curl` de al menos un caso por código.",
+      "ce": [
+        "RA7:a",
+        "RA7:b",
+        "RA7:c",
+        "RA7:d",
+        "RA7:e"
+      ],
+      "pista": "Nombres de recurso en plural y en minúsculas; el verbo expresa la acción, no la URL.",
+      "aceptacion": [
+        "`POST /rutas` válido devuelve 201 y `Location`.",
+        "Un cuerpo inválido devuelve 422 con los errores por campo.",
+        "`DELETE /rutas` (colección) devuelve 405 con `Allow`."
+      ],
+      "id": "15_ejercicio_UT6"
+    },
+    {
+      "ut": 6,
+      "dificultad": 2,
+      "titulo": "Prueba, documenta, asegura y consume la API",
+      "contexto": "La API de rutas debe verificarse, documentarse y ser consumida por otra aplicación de forma robusta.",
+      "tareas": [
+        "Escribe una batería de pruebas HTTP (script PHP, PHPUnit o colección Postman/Bruno) con al menos ocho casos que cubran códigos 200, 201, 404, 405 y 422 y la paginación.",
+        "Añade autenticación por token (`Authorization: Bearer`) y comprueba el 401 sin token y el 403 con permisos insuficientes.",
+        "Documenta la API con un fichero OpenAPI (`openapi.yaml`) con rutas, parámetros, cuerpos y respuestas, y valídalo con una herramienta (Swagger Editor/Redocly).",
+        "Crea un cliente PHP con cURL que consuma la API con tiempos máximos, control de errores y reintentos para fallos temporales; pruébalo contra una ruta que falla a propósito."
+      ],
+      "entrega": "Pruebas y resultado, `openapi.yaml`, cliente PHP y evidencias de las llamadas.",
+      "ce": [
+        "RA7:e",
+        "RA7:f",
+        "RA7:g",
+        "RA7:h"
+      ],
+      "pista": "Un cliente debe tratar de forma distinta los errores 4xx (no reintentar) y 5xx (reintentar con espera creciente).",
+      "aceptacion": [
+        "Las pruebas fallan si se rompe un código de estado.",
+        "Sin token la API devuelve 401.",
+        "El cliente reintenta un 503 y no reintenta un 404."
+      ],
+      "ampliacion": [
+        "Añade ETag y respuestas `304 Not Modified`, y un límite de peticiones con `429` y `Retry-After`."
+      ],
+      "id": "16_ejercicio_UT6"
+    },
+    {
+      "ut": 7,
+      "dificultad": 1,
+      "titulo": "Buscador interactivo con AJAX y validación",
+      "contexto": "La tienda quiere un buscador que se actualice mientras se escribe y un formulario de reserva que valide sin recargar la página.",
+      "tareas": [
+        "Explica las diferencias entre código del servidor y del cliente y las ventajas de combinar PHP y JavaScript en una aplicación (interactividad, menos recargas, reutilización de la API).",
+        "Crea un endpoint PHP que devuelva productos en JSON según `?q=` y una página con `fetch` que muestre los resultados mientras se escribe, con retardo (*debounce*) de 300 ms.",
+        "Gestiona los estados de la interfaz: cargando, sin resultados, error de red y error del servidor (4xx/5xx); recuerda que `fetch` no rechaza los códigos HTTP de error.",
+        "Añade un formulario de reserva con verificación en el cliente (JavaScript) y en el servidor (códigos 422), mostrando los errores junto a cada campo.",
+        "Identifica las tecnologías y frameworks que podrías usar para este caso (Fetch API, Axios, Alpine.js, htmx, Vue, Livewire…) y elige una con argumentos."
+      ],
+      "entrega": "Código del endpoint y de la página, capturas de los estados y una tabla de tecnologías.",
+      "ce": [
+        "RA8:a",
+        "RA8:b",
+        "RA8:c",
+        "RA8:d",
+        "RA8:e"
+      ],
+      "pista": "El texto recibido del servidor se inserta con `textContent`, no con `innerHTML`.",
+      "aceptacion": [
+        "Escribir en el cuadro actualiza la lista sin recargar y con una sola petición por pausa.",
+        "Se distinguen visualmente los estados cargando/vacío/error.",
+        "Un dato malicioso en un producto no ejecuta código en la página."
+      ],
+      "id": "17_ejercicio_UT7"
+    },
+    {
+      "ut": 7,
+      "dificultad": 2,
+      "titulo": "Página dinámica: panel actualizable e internacionalización",
+      "contexto": "Se construye un panel de reservas que modifica su contenido sin recargar, disponible en español e inglés.",
+      "tareas": [
+        "Crea una API de reservas (GET/POST) y un panel que actualice la lista y el total tras cada reserva modificando el DOM (crear y eliminar elementos, actualizar contadores).",
+        "Internacionaliza la interfaz: diccionario de textos por idioma, detección con `Accept-Language`, formateo de fechas y moneda con la extensión `intl` y plurales con `MessageFormatter`.",
+        "Permite cambiar el idioma desde la página y recuerda la elección (cookie o sesión).",
+        "Aplica estas tecnologías en una aplicación completa: protege la API con token CSRF y comprueba que un envío sin él falla."
+      ],
+      "entrega": "Panel, API, textos traducidos y una captura de la aplicación en cada idioma.",
+      "ce": [
+        "RA8:d",
+        "RA8:f",
+        "RA8:g"
+      ],
+      "pista": "No concatenes frases traducidas: usa mensajes completos con marcadores.",
+      "aceptacion": [
+        "La lista y el total se actualizan sin recargar.",
+        "Los números y fechas cambian de formato según el idioma.",
+        "El plural «1 plaza / 5 plazas» es correcto en ambos idiomas."
+      ],
+      "id": "18_ejercicio_UT7"
+    },
+    {
+      "ut": 7,
+      "dificultad": 3,
+      "titulo": "Aplicación híbrida con un repositorio externo y otro propio",
+      "contexto": "La web del club mostrará datos del tiempo de una API pública y publicará su propio repositorio de rutas en formato abierto.",
+      "tareas": [
+        "Analiza las ventajas de reutilizar información y código existentes (APIs públicas, bibliotecas) y los riesgos (disponibilidad, licencias, privacidad).",
+        "Consume una API pública (por ejemplo Open-Meteo, sin clave) desde PHP con cURL y caché local de 10 minutos, y muestra la información procesada (media, máximo, aviso) en una página.",
+        "Crea un repositorio propio: exporta las rutas de la base de datos a un fichero JSON/CSV versionado y a una API de solo lectura que otros puedan consumir.",
+        "Integra código de terceros mediante Composer (por ejemplo `nesbot/carbon` o `league/csv`) y explica cómo gestionas versiones y licencias.",
+        "Gestiona el fallo del servicio externo (tiempo agotado, respuesta inválida) mostrando datos en caché o un mensaje y registrando el incidente."
+      ],
+      "entrega": "Aplicación, ficheros exportados, `composer.json` y evidencias de los casos de fallo.",
+      "ce": [
+        "RA9:a",
+        "RA9:b",
+        "RA9:c",
+        "RA9:d",
+        "RA9:f"
+      ],
+      "pista": "Nunca muestres al usuario un error técnico del servicio externo.",
+      "aceptacion": [
+        "Con el servicio caído la página sigue funcionando.",
+        "El repositorio propio puede leerse con `curl` en JSON.",
+        "Las dependencias se instalan con `composer install`."
+      ],
+      "id": "19_ejercicio_UT7"
+    },
+    {
+      "ut": 7,
+      "dificultad": 4,
+      "titulo": "Informe con librerías, pruebas y documentación",
+      "contexto": "La dirección pide un informe mensual de reservas con gráficos y exportación a Excel/PDF, con calidad verificable.",
+      "tareas": [
+        "Calcula estadísticas con una biblioteca (por ejemplo `league/csv` + funciones de agregación) sobre un CSV grande usando generadores y mide la memoria usada.",
+        "Genera un informe en PDF (Dompdf) y una hoja de cálculo (PhpSpreadsheet) y un gráfico simple en la página con una biblioteca de JavaScript.",
+        "Desarrolla con TDD una clase de cálculo (por ejemplo `CalculoOcupacion`): escribe primero las pruebas con PHPUnit (rojo), implementa (verde) y refactoriza.",
+        "Depura un fallo con registro (Monolog) y herramientas del navegador, y documenta la aplicación con un README y comentarios de documentación.",
+        "Reflexiona sobre cuándo los datos justifican herramientas de Big Data o de inteligencia de negocios y qué librerías usarías."
+      ],
+      "entrega": "Proyecto con `composer.json`, pruebas en verde, informes generados y documentación.",
+      "ce": [
+        "RA8:g",
+        "RA9:e",
+        "RA9:g",
+        "RA9:h"
+      ],
+      "pista": "Un generador (`yield`) procesa un fichero enorme con memoria casi constante.",
+      "aceptacion": [
+        "`vendor/bin/phpunit` termina en verde.",
+        "El PDF y el XLSX se generan desde la aplicación.",
+        "La memoria máxima no crece con el tamaño del fichero."
+      ],
+      "id": "20_ejercicio_UT7"
+    }
+  ]
+}
